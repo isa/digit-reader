@@ -58,7 +58,7 @@ describe 'Digit Reader', ->
 
       eleven.should.equal 'on bir'
 
-   it 'should return text equivalent of a two-digit number', ->
+   it 'should return text equivalent of any two-digit number', ->
       dr = new DigitReader
 
       eighteen = dr.read(18)
@@ -68,4 +68,34 @@ describe 'Digit Reader', ->
       eighteen.should.equal 'on sekiz'
       seventy_six.should.equal 'yetmiş altı'
       ninety_nine.should.equal 'doksan dokuz'
+
+   it 'should return text equivalent of two-digit numbers starting with zero', ->
+      dr = new DigitReader
+
+      eight = dr.read('08')
+
+      eight.should.equal 'sekiz'
+
+   it 'should return text equivalent for two zeros', ->
+      dr = new DigitReader
+
+      eight = dr.read('00')
+
+      eight.should.equal 'sıfır'
+
+   it 'should return text equivalent of three-digit whole number for hundred', ->
+      dr = new DigitReader
+
+      hundred = dr.read(100)
+
+      hundred.should.equal 'yüz'
+
+   it 'should return text equivalent of three-digit any number in hundreds', ->
+      dr = new DigitReader
+
+      hundred_seventy_three = dr.read(173)
+      three_hundred_sixty_eight = dr.read(368)
+
+      hundred_seventy_three.should.equal 'yüz yetmiş üç'
+      three_hundred_sixty_eight.should.equal 'üç yüz altmış sekiz'
 
