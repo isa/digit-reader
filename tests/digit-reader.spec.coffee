@@ -3,7 +3,7 @@
 
 describe 'Digit Reader', ->
 
-   it 'should return text equivalent of a single digit number', ->
+   it 'should return text equivalent of a single-digit number', ->
       dr = new DigitReader
 
       zero = dr.read(0)
@@ -21,9 +21,51 @@ describe 'Digit Reader', ->
       one.should.equal 'bir'
       two.should.equal 'iki'
       three.should.equal 'üç'
-      four.should.equal 'dort'
+      four.should.equal 'dört'
       five.should.equal 'beş'
       six.should.equal 'altı'
       seven.should.equal 'yedi'
       eight.should.equal 'sekiz'
       nine.should.equal 'dokuz'
+
+   it 'should return text equivalent of a two-digit whole number', ->
+      dr = new DigitReader
+
+      ten = dr.read(10)
+      twenty = dr.read(20)
+      thirty = dr.read(30)
+      fourty = dr.read(40)
+      fifty = dr.read(50)
+      sixty = dr.read(60)
+      seventy = dr.read(70)
+      eighty = dr.read(80)
+      ninety = dr.read(90)
+
+      ten.should.equal 'on'
+      twenty.should.equal 'yirmi'
+      thirty.should.equal 'otuz'
+      fourty.should.equal 'kırk'
+      fifty.should.equal 'elli'
+      sixty.should.equal 'altmış'
+      seventy.should.equal 'yetmiş'
+      eighty.should.equal 'seksen'
+      ninety.should.equal 'doksan'
+
+   it 'should return text equivalent of a two-digit tens number', ->
+      dr = new DigitReader
+
+      eleven = dr.read(11)
+
+      eleven.should.equal 'on bir'
+
+   it 'should return text equivalent of a two-digit number', ->
+      dr = new DigitReader
+
+      eighteen = dr.read(18)
+      seventy_six = dr.read(76)
+      ninety_nine = dr.read(99)
+
+      eighteen.should.equal 'on sekiz'
+      seventy_six.should.equal 'yetmiş altı'
+      ninety_nine.should.equal 'doksan dokuz'
+
