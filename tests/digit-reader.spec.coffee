@@ -139,15 +139,15 @@ describe 'Digit Reader', ->
    it 'should return text equivalent of five-digit number whole number', ->
       dr = new DigitReader
 
-      ten_thousand = dr.read('10000')
+      ten_thousand = dr.read(10000)
 
       ten_thousand.should.equal 'on bin'
 
    it 'should return text equivalent of any five-digit number', ->
       dr = new DigitReader
 
-      seventy_thousand_and_three = dr.read('70003')
-      eighty_nine_thousand_and_hundred_and_fifty_six = dr.read('89156')
+      seventy_thousand_and_three = dr.read(70003)
+      eighty_nine_thousand_and_hundred_and_fifty_six = dr.read(89156)
 
       seventy_thousand_and_three.should.equal 'yetmiş bin üç'
       eighty_nine_thousand_and_hundred_and_fifty_six.should.equal 'seksen dokuz bin yüz elli altı'
@@ -158,4 +158,20 @@ describe 'Digit Reader', ->
       thousand = dr.read('01000')
 
       thousand.should.equal 'bin'
+
+   it 'should return text equivalent of six-digit number whole number', ->
+      dr = new DigitReader
+
+      hundred_thousand = dr.read(100000)
+
+      hundred_thousand.should.equal 'yüz bin'
+
+   it 'should return text equivalent of any six-digit number', ->
+      dr = new DigitReader
+
+      five_hundred_thousand_and_three = dr.read('500003')
+      nine_hundred_and_one_thousand_and_twenty_two = dr.read('901022')
+
+      five_hundred_thousand_and_three.should.equal 'beş yüz bin üç'
+      nine_hundred_and_one_thousand_and_twenty_two.should.equal 'dokuz yüz bir bin yirmi iki'
 
