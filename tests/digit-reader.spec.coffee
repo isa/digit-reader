@@ -1,4 +1,3 @@
-# DigitReader = require '../src/digit-reader'
 {DigitReader} = require '../src/digit-reader'
 
 describe 'Digit Reader', ->
@@ -69,19 +68,19 @@ describe 'Digit Reader', ->
       seventy_six.should.equal 'yetmiş altı'
       ninety_nine.should.equal 'doksan dokuz'
 
+   it 'should return text equivalent for zeros', ->
+      dr = new DigitReader
+
+      eight = dr.read('00')
+
+      eight.should.equal 'sıfır'
+
    it 'should return text equivalent of two-digit numbers starting with zero', ->
       dr = new DigitReader
 
       eight = dr.read('08')
 
       eight.should.equal 'sekiz'
-
-   it 'should return text equivalent for two zeros', ->
-      dr = new DigitReader
-
-      eight = dr.read('00')
-
-      eight.should.equal 'sıfır'
 
    it 'should return text equivalent of three-digit whole number for hundred', ->
       dr = new DigitReader
@@ -90,12 +89,73 @@ describe 'Digit Reader', ->
 
       hundred.should.equal 'yüz'
 
+   it 'should return text equivalent of three-digit numbers starting with zero', ->
+      dr = new DigitReader
+
+      eighty = dr.read('080')
+
+      eighty.should.equal 'seksen'
+
    it 'should return text equivalent of three-digit any number in hundreds', ->
       dr = new DigitReader
 
       hundred_seventy_three = dr.read(173)
+      hundred_and_three = dr.read(103)
       three_hundred_sixty_eight = dr.read(368)
 
       hundred_seventy_three.should.equal 'yüz yetmiş üç'
+      hundred_and_three.should.equal 'yüz üç'
       three_hundred_sixty_eight.should.equal 'üç yüz altmış sekiz'
+
+   it 'should return text equivalent of four-digit whole number for thousand', ->
+      dr = new DigitReader
+
+      thousand = dr.read(1000)
+
+      thousand.should.equal 'bin'
+
+   it 'should return text equivalent of four-digit number starting with zero', ->
+      dr = new DigitReader
+
+      hundred = dr.read('0100')
+
+      hundred.should.equal 'yüz'
+
+   it 'should return text equivalent of four-digit any number in thousands', ->
+      dr = new DigitReader
+
+      thousand_and_three = dr.read(1003)
+      thousand_and_thirty = dr.read(1030)
+      thousand_and_three_hundred = dr.read(1300)
+      thousand_and_three_hundred_and_seven = dr.read(1307)
+      four_thousand_and_three_hundred_and_seventy_five = dr.read(4375)
+
+      thousand_and_three.should.equal 'bin üç'
+      thousand_and_thirty.should.equal 'bin otuz'
+      thousand_and_three_hundred.should.equal 'bin üç yüz'
+      thousand_and_three_hundred_and_seven.should.equal 'bin üç yüz yedi'
+      four_thousand_and_three_hundred_and_seventy_five.should.equal 'dört bin üç yüz yetmiş beş'
+
+   it 'should return text equivalent of five-digit number whole number', ->
+      dr = new DigitReader
+
+      ten_thousand = dr.read('10000')
+
+      ten_thousand.should.equal 'on bin'
+
+   it 'should return text equivalent of any five-digit number', ->
+      dr = new DigitReader
+
+      seventy_thousand_and_three = dr.read('70003')
+      eighty_nine_thousand_and_hundred_and_fifty_six = dr.read('89156')
+
+      seventy_thousand_and_three.should.equal 'yetmiş bin üç'
+      eighty_nine_thousand_and_hundred_and_fifty_six.should.equal 'seksen dokuz bin yüz elli altı'
+
+   it 'should return text equivalent of five-digit number starting with zero', ->
+      dr = new DigitReader
+
+      thousand = dr.read('01000')
+
+      thousand.should.equal 'bin'
 
