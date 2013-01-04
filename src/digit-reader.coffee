@@ -5,17 +5,21 @@ class DigitReader
       @zero = 'sıfır'
       @hundred = 'yüz'
       @thousand = 'bin'
-      @million = 'milyon'
 
    read: (number) ->
-      [whole_number, precision] = new String(number).split ','
+      [whole_number, precision_number] = new String(number).split ','
+      whole = @read_whole whole_number
+      precision = @read_whole precision_number
 
+      "#{whole} lira #{precision} kuruş"
+
+   read_whole: (whole_number) ->
       return @zero if Math.abs(whole_number) is 0
-      return (@single_digit whole_number).trim() if Math.abs(whole_number) < 10
-      return (@two_digit whole_number).trim() if Math.abs(whole_number) < 100
-      return (@three_digit whole_number).trim() if Math.abs(whole_number) < 1000
+      return (@single_digit "#{whole_number}").trim() if Math.abs(whole_number) < 10
+      return (@two_digit "#{whole_number}").trim() if Math.abs(whole_number) < 100
+      return (@three_digit "#{whole_number}").trim() if Math.abs(whole_number) < 1000
 
-      (@more_digits whole_number).trim()
+      (@more_digits "#{whole_number}").trim()
 
    single_digit: (number) ->
       @digits[Math.abs(number) - 1]
@@ -49,7 +53,7 @@ class DigitReader
 
       return @thousand + ' ' + @three_digit "#{rest}" if parseInt(first) is 1
 
-      thousands = (@read first) + " #{@thousand} "
+      thousands = (@read_whole first) + " #{@thousand} "
 
       return thousands + @three_digit "#{rest}"
 
